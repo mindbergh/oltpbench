@@ -49,15 +49,15 @@ public class YCSBBenchmark extends BenchmarkModule {
 
             Table t = this.catalog.getTable("USERTABLE");
             assert (t != null) : "Invalid table name '" + t + "' " + this.catalog.getTables();
-            String userCount = SQLUtil.getMaxColSQL(t, "ycsb_key");
-            Statement stmt = metaConn.createStatement();
-            ResultSet res = stmt.executeQuery(userCount);
-            int init_record_count = 0;
-            while (res.next()) {
-                init_record_count = res.getInt(1);
-            }
+            //String userCount = SQLUtil.getMaxColSQL(t, "ycsb_key");
+            //Statement stmt = metaConn.createStatement();
+            //ResultSet res = stmt.executeQuery(userCount);
+            int init_record_count = 3000;
+            //while (res.next()) {
+            //    init_record_count = res.getInt(1);
+            //}
             assert init_record_count > 0;
-            res.close();
+            //res.close();
             //
             for (int i = 0; i < workConf.getTerminals(); ++i) {
 //                Connection conn = this.makeConnection();

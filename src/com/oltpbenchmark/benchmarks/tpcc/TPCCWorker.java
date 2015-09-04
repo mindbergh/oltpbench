@@ -25,6 +25,8 @@ package com.oltpbenchmark.benchmarks.tpcc;
  *
  */
 
+import org.apache.log4j.Logger;
+
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -44,6 +46,7 @@ import com.oltpbenchmark.util.SimplePrinter;
 public class TPCCWorker extends Worker {
 
 	// private TransactionTypes transactionTypes;
+    private static final Logger LOG = Logger.getLogger(TPCCWorker.class);
 
 	private String terminalName;
 
@@ -93,9 +96,12 @@ public class TPCCWorker extends Worker {
         	System.err.println("We have been invoked with an INVALID transactionType?!");
         	throw new RuntimeException("Bad transaction type = "+ nextTransaction);
 	    } catch (RuntimeException ex) {
+            LOG.debug("Rollback txn: " + transactionCount);
+            LOG.debug(ex.getMessage());
 	        conn.rollback();
 	        return (TransactionStatus.RETRY_DIFFERENT);
 	    }
+        LOG.debug("Commit txn: " + transactionCount);
 		transactionCount++;
         conn.commit();
         return (TransactionStatus.SUCCESS);

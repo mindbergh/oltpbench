@@ -16,6 +16,8 @@
 
 package com.oltpbenchmark.benchmarks.ycsb;
 
+import org.apache.log4j.Logger;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,9 +41,11 @@ import com.oltpbenchmark.util.TextGenerator;
 
 public class YCSBWorker extends Worker {
 
+    private static final Logger LOG = Logger.getLogger(YCSBWorker.class);
     private ZipfianGenerator readRecord;
     private static CounterGenerator insertRecord;
     private ZipfianGenerator randScan;
+    private int transactionCount = 1;
 
     private final Map<Integer, String> m = new HashMap<Integer, String>();
     
@@ -75,6 +79,7 @@ public class YCSBWorker extends Worker {
         } else if (procClass.equals(UpdateRecord.class)) {
             updateRecord();
         }
+        LOG.debug("Commit txn: " + transactionCount++);
         conn.commit();
         return (TransactionStatus.SUCCESS);
     }

@@ -155,11 +155,22 @@ public class NewOrder extends TPCCProcedure {
 		float ol_amount, total_amount = 0;
 		try
 		{
+			int rowcount = 0;
 			stmtGetCustWhse.setInt(1, w_id);
 			stmtGetCustWhse.setInt(2, w_id);
 			stmtGetCustWhse.setInt(3, d_id);
 			stmtGetCustWhse.setInt(4, c_id);
 			ResultSet rs = stmtGetCustWhse.executeQuery();
+			/*
+			rowcount = 0;
+			if (rs.last()) {
+				LOG.debug("here");
+				rowcount = rs.getRow();
+				rs.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
+				LOG.debug(String.format("Num of row: %d", rowcount));
+			}
+			*/
+
 			if (!rs.next())
 				throw new RuntimeException("W_ID=" + w_id + " C_D_ID=" + d_id
 						+ " C_ID=" + c_id + " not found!");
@@ -174,6 +185,15 @@ public class NewOrder extends TPCCProcedure {
 			stmtGetDist.setInt(1, w_id);
 			stmtGetDist.setInt(2, d_id);
 			rs = stmtGetDist.executeQuery();
+			rowcount = 0;
+			/*
+			if (rs.last()) {
+				rowcount = rs.getRow();
+				rs.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
+				LOG.debug(String.format("Num of row: %d", rowcount));
+			}
+			*/
+
 			if (!rs.next()) {
 				throw new RuntimeException("D_ID=" + d_id + " D_W_ID=" + w_id
 						+ " not found!");

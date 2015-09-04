@@ -98,7 +98,7 @@ public class Payment extends TPCCProcedure {
 		    // payUpdateWhse =this.getPreparedStatement(conn, payUpdateWhseSQL);
 
 
-            int districtID = TPCCUtil.randomNumber(terminalDistrictLowerID,terminalDistrictUpperID, gen);
+          int districtID = TPCCUtil.randomNumber(terminalDistrictLowerID,terminalDistrictUpperID, gen);
         	int customerID = TPCCUtil.getCustomerID(gen);
 
         	int x = TPCCUtil.randomNumber(1, 100, gen);
