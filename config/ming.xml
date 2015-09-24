@@ -7,17 +7,17 @@
     <username>postgres</username>
     <password>postgres</password>
     <isolation>TRANSACTION_READ_COMMITTED</isolation>
-    
+
     <!-- Scalefactor in YCSB is *1000 the number of rows in the USERTABLE-->
     <scalefactor>2</scalefactor>
-    
+
     <!-- The workload -->
     <terminals>8</terminals>
     <works>
         <work>
-          <time>15</time>
+          <time>30</time>
           <rate>unlimited</rate>
-          <weights>50,50,0,0,0,0</weights>
+          <weights>0,100,0,0,0,0</weights>
         </work>
     </works>
 

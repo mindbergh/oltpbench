@@ -453,6 +453,7 @@ work:
                     }
                     else {
                         // UNKNOWN: In this case .. Retry as well!
+                        LOG.debug("Unknown: " + ex.getNextException());
                         continue;
                         //FIXME Disable this for now
                         // throw ex;
